@@ -1,0 +1,13 @@
+h1 {
+	color: white;
+}
+
+li a {
+    color: white;
+}
+
+body {
+    background: white url("images/background.jpg") no-repeat;
+    background-size: cover;
+    margin: 30px 50px;
+}
