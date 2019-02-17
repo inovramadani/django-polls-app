@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.core import serializers
 
 from .models import Question, Choice
 
@@ -13,10 +14,11 @@ class IndexView(generic.ListView):
 	def get_queryset(self):
 		"""Return the last five published questions (not including those set to be
     published in the future)."""
-		return Question.objects.filter(
+		latest_question_list = Question.objects.filter(
 			pub_date__lte=timezone.now()
 		).order_by('-pub_date')[:5]
 
+		return serializers.serialize('json', latest_question_list)
 
 class DetailView(generic.DetailView):
 	model = Question
